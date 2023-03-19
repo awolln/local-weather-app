@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ICurrentweather } from '../icurrent-weather';
 
 @Component({
   selector: 'app-current-weather',
@@ -6,6 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./current-weather.component.css']
 })
 export class CurrentWeatherComponent {
-  
+  current: ICurrentweather
+  constructor() {
+    this.current = {
+      city: 'Redmond',
+      country: 'US',
+      date: new Date(),
+      image: '',
+      temperature: 50,
+      description: 'cloudy'
+
+    }
+  }
+
 
 }

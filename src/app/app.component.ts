@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ICurrentweather } from './icurrent-weather';
+import { WeatherService } from './weather.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  [x: string]: any;
   title = 'local-weather-app';
+  currentWeather: ICurrentweather = {
+      city: '',
+      country: '',
+      date: new Date(),
+      image: '',
+      temperature: 0,
+      description: ''
+   }
+  constructor(private weatherService:WeatherService) {}
+  doSearch(searchValue: string){
+    const userInput = searchValue.split(',').map(s => s.trim());
+    this.weatherService.getCurrentWeather(userInput[0],userInput.length > 1 ?
+      userInput[1] : undefined).subscribe
+      (data => this.currentWeather = data)
+      
+
+  }
+
 }
